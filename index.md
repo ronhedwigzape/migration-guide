@@ -1,30 +1,142 @@
 ---
-# https://vitepress.dev/reference/default-theme-home-page
 layout: home
 
 hero:
-  name: "Migration to New Tabulation System"
-  text: "Seamlessly transition to a modern tabulation system with our comprehensive guide."
-  tagline: "Empowering your data management with cutting-edge solutions"
+  name: ACLC-Iriga Tabulation
+  text: Seamlessly migrate and manage pageant tabulation systems
+  tagline: Comprehensive guide from migration to real-time dashboards
   actions:
-    - theme: brand
-      text: Explore Markdown Examples
-      link: /markdown-examples
-    - theme: alt
-      text: Discover API Examples
-      link: /api-examples
+    - text: Start Migration
+      link: /migration
+      type: primary
+    - text: Development Setup
+      link: /setup
+      type: default
 
 features:
-  - title: Intuitive Interface
-    details: "Experience a user-friendly interface designed to simplify your workflow and enhance productivity."
-  - title: Robust Performance
-    details: "Leverage high-performance capabilities to handle complex data operations with ease."
-  - title: Seamless Integration
-    details: "Effortlessly integrate with existing systems and tools to streamline your processes."
-  - title: Comprehensive Documentation
-    details: "Access detailed guides and resources to support your migration journey every step of the way."
-  - title: Community Support
-    details: "Join a vibrant community of users and developers for collaboration and support."
-  - title: Regular Updates
-    details: "Stay ahead with regular updates and new features to keep your system at the forefront of technology."
+  - title: Guided Migration
+    details: Step-by-step instructions to fork or create a new ACLC-Iriga tabulation repo, import schemas, and insert data via UI.
+  - title: UI-Driven Data Management
+    details: Use the built-in Admin Dashboard CRUD pages to manage criteria, participants, titles, eliminations, and judge assignments—no raw SQL needed.
+  - title: Local Development
+    details: Configure XAMPP and Node.js, then run the application locally with hot-reload for development and testing.
+  - title: Automated Testing
+    details: Set up PHPUnit tests on a test database to ensure backend stability as you modify features.
+  - title: Local “Production” Deployment
+    details: Deploy on localhost for real event use, manage live data, back up ratings, and handle LAN access.
+  - title: Real-time Dashboard
+    details: Integrate the Bullet-Train WebSocket dashboard for live score updates during events.
+  - title: Clean Exports & Templates
+    details: Export clean database dumps with initial data as templates for future pageants.
+  - title: Community & Consistency
+    details: Leverage ACLC-Iriga’s shared repository patterns and community knowledge for consistency across events.
+
+footer: |
+  <div style="text-align:center; margin-top:2em;">
+    <small>Built with VitePress • <a href="https://github.com/aclc-iriga/your-docs-repo" target="_blank">Source on GitHub</a></small>
+  </div>
+
+
 ---
+
+## Prerequisites
+
+- **Node.js** (v18+ recommended; newer LTS such as v20 or v22 preferred)  
+- **npm** (bundled with Node.js)
+
+## Project Structure
+
+```plaintext
+.
+├── README.md
+├── package.json
+├── .gitignore
+├── index.md
+├── migration.md
+├── setup.md
+├── testing.md
+├── production.md
+├── websocket.md
+└── .vitepress/
+    └── config.js
+```
+
+## Installation
+
+1. Install VitePress:
+
+```bash
+npm install -D vitepress
+```
+
+2. Ensure `package.json` has scripts such as:
+
+```json
+{
+  "scripts": {
+    "docs:dev": "vitepress dev",
+    "docs:build": "vitepress build",
+    "docs:preview": "vitepress preview",
+    "delete:pages": "git push origin --delete gh-pages",
+    "deploy": "git add .vitepress/dist -f && git commit -m \"chore(deployment): deploy to production\" && git subtree push --prefix .vitepress/dist origin gh-pages"
+  }
+}
+```
+
+## Local Development
+
+Run:
+
+```bash
+npm run docs:dev
+```
+
+## Preview Built Site Locally
+
+After building:
+
+```bash
+npm run docs:build
+npm run docs:preview
+```
+
+Open the printed local URL to preview the static site.
+
+## 🛠️ Production – GitHub Pages
+
+1. Delete the current `gh-pages` branch if it exists:
+
+```bash
+npm run delete:pages
+```
+
+2. Build the docs:
+
+```bash
+npm run docs:build
+```
+
+3. Commit & push the built output to `gh-pages`:
+
+```bash
+npm run deploy
+```
+
+4. After deployment:
+
+    * In your Git client, undo the commit locally.
+    * Delete `.vitepress/dist`.
+
+---
+
+Welcome to the ACLC-Iriga Tabulation documentation site. Use the navigation above or scroll down for quick links:
+
+::: details 🔗 Quick Links
+
+* [Migration Guide](/migration) – Forking/rebranding and initial database import & UI-driven data insertion.
+* [Development Setup](/setup) – Installing dependencies, configuring, and running locally.
+* [Backend Testing](/testing) – Setting up and running PHPUnit tests against a test database.
+* [Production Deployment](/production) – Deploying for actual use on localhost and backup strategies.
+* [WebSocket Dashboard](/websocket) – Integrating and accessing the real-time Bullet-Train dashboard.
+:::
+
