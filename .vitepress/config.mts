@@ -10,12 +10,6 @@ export default defineConfig({
 
     // Top-level navigation
     nav: [
-      { text: 'Home', link: '/' },
-      { text: 'Migration', link: '/migration' },
-      { text: 'Setup', link: '/setup' },
-      { text: 'Testing', link: '/testing' },
-      { text: 'Production', link: '/production' },
-      { text: 'WebSocket', link: '/websocket' },
       { text: 'Contributing', link: '/contributing' }
     ],
 

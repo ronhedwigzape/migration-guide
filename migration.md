@@ -11,12 +11,27 @@ This guide walks you through forking or creating a new ACLC‑Iriga repository, 
 I recommend using PHPStorm as your IDE for its powerful search and replace features.
 :::
 
+## 0. Decide New Naming for the Competition
+
+* **If the title contains “Miss”**:
+  `slug = 'miss' + condensed title` (lowercase, no spaces).
+  *Example:* “Miss Iriga” → `missiriga`.
+
+* **Otherwise**:
+  `slug = uppercase initials + '-' + location` (no spaces).
+  *Example:* “Miss Gay San Roque” → `mgsr-sanroque`.
+
 ## 1. Fork the Base Repo
 
 ### Via GitHub Fork
 
 1. Click **Fork** on the canonical template (e.g., `missiriga`).  
 2. Choose the **aclc‑iriga** organization as the target.
+3. Rename the forked repo to `<competition-new-slug>`.
+4. Update the description to:
+   `Tabulation System for <Competition Title> (<Competition Location>)`.
+5. Uncheck the **Copy the master branch only** option.
+6. Click **Create fork**.
 
 ## 2. Clone Your New Repo
 
@@ -57,17 +72,7 @@ export default defineConfig({
 })
 ```
 
-## 4. Decide New Naming
-
-* **If the title contains “Miss”**:
-  `slug = 'miss' + condensed title` (lowercase, no spaces).
-  *Example:* “Miss Iriga” → `missiriga`.
-
-* **Otherwise**:
-  `slug = uppercase initials + '-' + location` (no spaces).
-  *Example:* “Miss Gay San Roque” → `mgsr-sanroque`.
-
-## 5. Update Repository Metadata
+## 4. Update Repository Metadata
 
 1. **On GitHub**
 
@@ -82,7 +87,7 @@ export default defineConfig({
     * **Old competition title** → **New competition title**
     * **Old competition location** → **New competition location**
 
-## 6. Database Creation & Import
+## 5. Database Creation & Import
 
 ### Create Database
 
@@ -95,10 +100,10 @@ In phpMyAdmin, create a database named exactly `<competition-new-slug>`.
 3. Click **Go**.
 
 ::: warning
-All scoring data lives in the `ratings` table.
+All scoring data lives in the `ratings` table. This table is sensitive. Don't import when a dev server is running. 
 :::
 
-## 7. Initial Data Insertion
+## 6. Initial Data Insertion
 
 ```bash
 npm install
@@ -116,7 +121,7 @@ Use the Admin Dashboard to add:
 * Eliminations
 * Judge Assignments
 
-## 8. Export Final Database
+## 7. Export Final Database
 
 1. In phpMyAdmin, select the `<competition-new-slug>` database.
 2. Click **Export**.

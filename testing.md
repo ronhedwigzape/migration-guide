@@ -10,7 +10,7 @@ Automated tests help you catch regressions as you add features.
 ## Prerequisites
 
 - **Composer** installed globally.
-- A test database named `test_<your-new-slug>`.
+- A test database named `test_<competition-new-slug>`.
 
 ## 1. Configure Test Database
 
@@ -21,7 +21,7 @@ cp tests/backend/config/test-database.example.php tests/backend/config/test-data
 
 In phpMyAdmin:
 
-1. Create database `test_<your-new-slug>`.
+1. Create database `test_<competition-new-slug>`.
 2. Import your production `.sql` dump.
 
 ## 2. Install PHP Dependencies

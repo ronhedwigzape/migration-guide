@@ -44,7 +44,7 @@ $websocket = [
 ## 3. Access the Dashboard
 
 1. Ensure the WS service is running.
-2. Visit `http://localhost/<your-new-slug>/app/dashboard`.
+2. Visit `http://localhost/<competition-new-slug>/app/dashboard`.
 
 ## 4. Test Real‑Time Updates
 

@@ -21,8 +21,8 @@ Follow these steps after migrating your repository.
 
 ```bash
 cd C:/xampp/htdocs
-git clone https://github.com/aclc‑iriga/<your-new-slug>.git
-cd <your-new-slug>
+git clone https://github.com/aclc‑iriga/<competition-new-slug>.git
+cd <competition-new-slug>
 ```
 
 ## 4. Install Dependencies
@@ -44,8 +44,8 @@ npm run dev
 ```
 
 * Note the port in the console (e.g., `5173`).
-* **Public:**  `http://localhost:<port>/<your-new-slug>/`
-* **Admin:**   `http://localhost:<port>/<your-new-slug>/app`
+* **Public:**  `http://localhost:<port>/<competition-new-slug>/`
+* **Admin:**   `http://localhost:<port>/<competition-new-slug>/app`
 
 ## 7. Manage Data
 

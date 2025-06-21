@@ -16,8 +16,8 @@ npm run build
 ## 2. Copy to XAMPP
 
 1. Stop the dev server (`npm run dev`).
-2. Copy the project folder into `C:/xampp/htdocs/<your-new-slug>`.
-3. Ensure `app/config/database.php` points to your `<your-new-slug>` database.
+2. Copy the project folder into `C:/xampp/htdocs/<competition-new-slug>`.
+3. Ensure `app/config/database.php` points to your `<competition-new-slug>` database.
 
 ## 3. Set Permissions
 
@@ -25,8 +25,8 @@ Ensure `/app/crud/uploads` is writable by Apache if photos will be uploaded.
 
 ## 4. Access the Application
 
-* **Public:**  `http://localhost/<your-new-slug>/`
-* **Admin:**   `http://localhost/<your-new-slug>/app` (change default password)
+* **Public:**  `http://localhost/<competition-new-slug>/`
+* **Admin:**   `http://localhost/<competition-new-slug>/app` (change default password)
 
 ## 5. Backups
 
@@ -45,7 +45,7 @@ Ensure `/app/crud/uploads` is writable by Apache if photos will be uploaded.
 ## 6. Network Access 
 
 1. Find your machine’s LAN IP (e.g., `192.168.1.50`).
-2. Access via `http://192.168.1.50/<your-new-slug>/`.
+2. Access via `http://192.168.1.50/<competition-new-slug>/`.
 3. Open HTTP port in your firewall if needed.
 
 ## 7. Cleanup

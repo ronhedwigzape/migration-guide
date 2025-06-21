@@ -29,7 +29,7 @@ This guide walks you through forking or creating a new ACLC‑Iriga repository, 
     git clone https://github.com/original/your-template.git
     cd your-template
     git remote remove origin
-    git remote add origin https://github.com/aclc‑iriga/<your-new-slug>.git
+    git remote add origin https://github.com/aclc‑iriga/<competition-new-slug>.git
     git push -u origin master
 ```
 
@@ -39,12 +39,12 @@ This guide walks you through forking or creating a new ACLC‑Iriga repository, 
 
 ```bash
 cd C:/xampp/htdocs
-git clone https://github.com/aclc‑iriga/<your-new-slug>.git
-cd <your-new-slug>
+git clone https://github.com/aclc‑iriga/<competition-new-slug>.git
+cd <competition-new-slug>
 ```
 
 ::: tip
-Replace `<your-new-slug>` with your desired slug (e.g., `mgsr-nabua`).
+Replace `<competition-new-slug>` with your desired slug (e.g., `mgsr-nabua`).
 :::
 
 ## 3. Decide New Naming
@@ -61,7 +61,7 @@ Replace `<your-new-slug>` with your desired slug (e.g., `mgsr-nabua`).
 
 1. **On GitHub**
 
-    * Rename the repository to `<your-new-slug>`.
+    * Rename the repository to `<competition-new-slug>`.
     * Update its description to:
       `Tabulation System for <Your Title> (<Your Location>)`.
 
@@ -76,7 +76,7 @@ Replace `<your-new-slug>` with your desired slug (e.g., `mgsr-nabua`).
 
 ### Create Database
 
-In phpMyAdmin, create a database named exactly `<your-new-slug>`.
+In phpMyAdmin, create a database named exactly `<competition-new-slug>`.
 
 ### Import Dump
 
@@ -95,8 +95,8 @@ npm install
 npm run dev
 ```
 
-* **Public URL:** `http://localhost:<port>/<your-new-slug>/`
-* **Admin URL:**  `http://localhost:<port>/<your-new-slug>/app`
+* **Public URL:** `http://localhost:<port>/<competition-new-slug>/`
+* **Admin URL:**  `http://localhost:<port>/<competition-new-slug>/app`
 
 Use the Admin Dashboard to add:
 
@@ -109,7 +109,7 @@ Use the Admin Dashboard to add:
 ## 7. Export Final Database
 
 ::: details Export Steps
-1. In phpMyAdmin, select the `<your-new-slug>` database.
+1. In phpMyAdmin, select the `<competition-new-slug>` database.
 2. Click **Export** → **Custom**.
 3. Optionally deselect tables (e.g., `ratings`).
 4. Download the `.sql` file.
@@ -117,8 +117,8 @@ Use the Admin Dashboard to add:
 
 ```bash
 mkdir -p db
-mv ~/Downloads/<your-new-slug>.sql db/
-git add db/<your-new-slug>.sql
+mv ~/Downloads/<competition-new-slug>.sql db/
+git add db/<competition-new-slug>.sql
 git commit -m "Add exported schema + initial data"
 ```
 
@@ -152,8 +152,8 @@ Follow these steps after migrating your repository.
 
 ```bash
 cd C:/xampp/htdocs
-git clone https://github.com/aclc‑iriga/<your-new-slug>.git
-cd <your-new-slug>
+git clone https://github.com/aclc‑iriga/<competition-new-slug>.git
+cd <competition-new-slug>
 ```
 
 ## 4. Install Dependencies
@@ -175,8 +175,8 @@ npm run dev
 ```
 
 * Note the port in the console (e.g., `5173`).
-* **Public:**  `http://localhost:<port>/<your-new-slug>/`
-* **Admin:**   `http://localhost:<port>/<your-new-slug>/app`
+* **Public:**  `http://localhost:<port>/<competition-new-slug>/`
+* **Admin:**   `http://localhost:<port>/<competition-new-slug>/app`
 
 ## 7. Manage Data
 
@@ -208,7 +208,7 @@ Automated tests help you catch regressions as you add features.
 ## Prerequisites
 
 - **Composer** installed globally.  
-- A test database named `test_<your-new-slug>`.
+- A test database named `test_<competition-new-slug>`.
 
 ## 1. Configure Test Database
 
@@ -219,7 +219,7 @@ cp tests/backend/config/test-database.example.php tests/backend/config/test-data
 
 In phpMyAdmin:
 
-1. Create database `test_<your-new-slug>`.
+1. Create database `test_<competition-new-slug>`.
 2. Import your production `.sql` dump.
 
 ## 2. Install PHP Dependencies
@@ -279,8 +279,8 @@ npm run build
 ## 2. Copy to XAMPP
 
 1. Stop the dev server (`npm run dev`).
-2. Copy the project folder into `C:/xampp/htdocs/<your-new-slug>`.
-3. Ensure `app/config/database.php` points to your `<your-new-slug>` database.
+2. Copy the project folder into `C:/xampp/htdocs/<competition-new-slug>`.
+3. Ensure `app/config/database.php` points to your `<competition-new-slug>` database.
 
 ## 3. Set Permissions
 
@@ -288,8 +288,8 @@ Ensure `/app/crud/uploads` is writable by Apache if photos will be uploaded.
 
 ## 4. Access the Application
 
-* **Public:**  `http://localhost/<your-new-slug>/`
-* **Admin:**   `http://localhost/<your-new-slug>/app` (change default password)
+* **Public:**  `http://localhost/<competition-new-slug>/`
+* **Admin:**   `http://localhost/<competition-new-slug>/app` (change default password)
 
 ## 5. Backups
 
@@ -308,7 +308,7 @@ Ensure `/app/crud/uploads` is writable by Apache if photos will be uploaded.
 ## 6. LAN Access (Optional)
 
 1. Find your machine’s LAN IP (e.g., `192.168.1.50`).
-2. Access via `http://192.168.1.50/<your-new-slug>/`.
+2. Access via `http://192.168.1.50/<competition-new-slug>/`.
 3. Open HTTP port in your firewall if needed.
 
 ## 7. Cleanup
@@ -361,7 +361,7 @@ return [
 ## 3. Access the Dashboard
 
 1. Ensure the WS service is running.
-2. Visit `http://localhost/<your-new-slug>/app/dashboard`.
+2. Visit `http://localhost/<competition-new-slug>/app/dashboard`.
 
 ## 4. Test Real‑Time Updates
 
@@ -374,7 +374,7 @@ return [
 
 * Bind the WS service to `0.0.0.0` or your LAN IP.
 * Access via `ws://<host-ip>:6001` and
-  `http://<host-ip>/<your-new-slug>/app/dashboard`.
+  `http://<host-ip>/<competition-new-slug>/app/dashboard`.
 * Adjust firewall rules for the WS port.
 :::
 
