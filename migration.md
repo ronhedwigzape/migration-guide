@@ -7,40 +7,57 @@ description: Fork, rebrand, import your DB, and insert initial data via the App 
 
 This guide walks you through forking or creating a new ACLC‑Iriga repository, importing your database, and seeding initial data via the UI.
 
-## 1. Fork or Create the Base Repo
+::: tip
+I recommend using PHPStorm as your IDE for its powerful search and replace features.
+:::
+
+## 1. Fork the Base Repo
 
 ### Via GitHub Fork
 
-1. Click **Fork** on the canonical template (e.g., `missiriga`).
+1. Click **Fork** on the canonical template (e.g., `missiriga`).  
 2. Choose the **aclc‑iriga** organization as the target.
-
-### Via New Repository
-
-::: details CLI Instructions
-
-```bash
-git clone https://github.com/original/your-template.git
-cd your-template
-git remote remove origin
-git remote add origin https://github.com/aclc‑iriga/<your-new-slug>.git
-git push -u origin master
-```
-
-:::
 
 ## 2. Clone Your New Repo
 
 ```bash
 cd C:/xampp/htdocs
-git clone https://github.com/aclc‑iriga/<your-new-slug>.git
-cd <your-new-slug>
+git clone https://github.com/aclc‑iriga/<competition-new-slug>.git
+cd <competition-new-slug>
 ```
 
 ::: tip
-Replace `<your-new-slug>` with your desired slug (e.g., `mgsr-nabua`).
+Replace `<competition-new-slug>` with your desired slug (e.g., `mgsr-nabua`).
 :::
 
-## 3. Decide New Naming
+## 3. Refactoring & Port Update
+
+Before you begin forking and importing:
+
+1. **Refactor identifiers**
+   Open the project in **PHPStorm** (or your IDE of choice) and use its “Replace in Path” feature to update:
+
+    * **`<competition-old-slug>`** → **`<competition-new-slug>`**
+    * **Old competition title** → **New competition title**
+    * **Old location** → **New location**
+    * **Old port** (e.g. `5173`) → **New port** (e.g. `5174`)
+
+2. **Update dev server port**
+   In your Vite config (e.g. `vite.config.js`), change:
+
+```js
+export default defineConfig({
+    // other configurations...
+    server: {
+        host: 'localhost',
+        port: 5174, // Change to your new port
+        strictPort: true
+    }
+    // other configurations...
+})
+```
+
+## 4. Decide New Naming
 
 * **If the title contains “Miss”**:
   `slug = 'miss' + condensed title` (lowercase, no spaces).
@@ -50,26 +67,26 @@ Replace `<your-new-slug>` with your desired slug (e.g., `mgsr-nabua`).
   `slug = uppercase initials + '-' + location` (no spaces).
   *Example:* “Miss Gay San Roque” → `mgsr-sanroque`.
 
-## 4. Update Repository Metadata
+## 5. Update Repository Metadata
 
 1. **On GitHub**
 
-   * Rename the repository to `<your-new-slug>`.
-   * Update its description to:
-     `Tabulation System for <Your Title> (<Your Location>)`.
+    * Rename the repository to `<competition-new-slug>`.
+    * Update its description to:
+      `Tabulation System for <Competition Title> (<Competition Location>)`.
 
 2. **Locally**
    Search & replace across the codebase:
 
-   * Old slug → new slug
-   * Old title → new title
-   * Old location → new location
+    * **`<competition-old-slug>`** → **`<competition-new-slug>`**
+    * **Old competition title** → **New competition title**
+    * **Old competition location** → **New competition location**
 
-## 5. Database Creation & Import
+## 6. Database Creation & Import
 
 ### Create Database
 
-In phpMyAdmin, create a database named exactly `<your-new-slug>`.
+In phpMyAdmin, create a database named exactly `<competition-new-slug>`.
 
 ### Import Dump
 
@@ -78,39 +95,30 @@ In phpMyAdmin, create a database named exactly `<your-new-slug>`.
 3. Click **Go**.
 
 ::: warning
-All scoring data lives in `ratings`.
+All scoring data lives in the `ratings` table.
 :::
 
-## 6. Initial Data Insertion
+## 7. Initial Data Insertion
 
 ```bash
 npm install
 npm run dev
 ```
 
-* **Public URL:** `http://localhost:<port>/<your-new-slug>/`
-* **Admin URL:**  `http://localhost:<port>/<your-new-slug>/app`
+* **Public URL:** `http://localhost:5174/<competition-new-slug>/`
+* **Admin URL:**  `http://localhost:5174/<competition-new-slug>/app`
 
 Use the Admin Dashboard to add:
 
 * Criteria
 * Titles
-* Participants (with photos)
+* Teams (with photos for upload)
 * Eliminations
 * Judge Assignments
 
-## 7. Export Final Database
+## 8. Export Final Database
 
-::: details Export Steps
-1. In phpMyAdmin, select the `<your-new-slug>` database.
-2. Click **Export** → **Custom**.
-3. Optionally deselect tables (e.g., `ratings`).
-4. Download the `.sql` file.
-   :::
-
-```bash
-mkdir -p db
-mv ~/Downloads/<your-new-slug>.sql <your-new-slug>/
-git add <your-new-slug>/<your-new-slug>.sql
-git commit -m "Add exported schema + initial data"
-```
+1. In phpMyAdmin, select the `<competition-new-slug>` database.
+2. Click **Export**.
+3. Download the `.sql` file.
+4. Store it in your repo at the root level as `<competition-new-slug>.sql`.
