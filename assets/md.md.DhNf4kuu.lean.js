@@ -1,0 +1,1 @@
+import{_ as i,c as a,o as n,ae as l}from"./chunks/framework.BIOcqIiB.js";const r=JSON.parse('{"title":"","description":"","frontmatter":{},"headers":[],"relativePath":"md.md","filePath":"md.md"}'),t={name:"md.md"};function h(p,s,k,e,d,E){return n(),a("div",null,s[0]||(s[0]=[l("",18)]))}const o=i(t,[["render",h]]);export{r as __pageData,o as default};
