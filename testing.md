@@ -49,9 +49,3 @@ Fix any failures, then commit:
 git add tests/
 git commit -m "Add/fix tests"
 ```
-
-## 5. CI Integration
-
-::: warning
-Manage test DB credentials via environment variables—do not commit them.
-:::

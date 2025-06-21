@@ -10,7 +10,7 @@
     "docs:build": "vitepress build",
     "docs:preview": "vitepress preview",
     "delete:pages": "git push origin --delete gh-pages",
-    "deploy": "git add .vitepress/dist -f && git commit -m \"chore(deployment): deploy to production\" && git subtree push --prefix .vitepress/dist origin gh-pages",
+    "deploy": "git add .vitepress/dist -f && git commit -m \"chore(deployment): deploy to production\" && git subtree push --prefix .vitepress/dist origin gh-pages && git reset --mixed HEAD~1",
     "fd": "npm run delete:pages && npm run docs:build && npm run deploy"
   },
   "devDependencies": {

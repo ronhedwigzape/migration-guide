@@ -20,6 +20,7 @@ Follow these steps after migrating your repository.
 ## 3. Clone & Navigate
 
 ```bash
+cd /  # or use `cd C:\` on Windows
 cd C:/xampp/htdocs
 git clone https://github.com/aclc‑iriga/<competition-new-slug>.git
 cd <competition-new-slug>
