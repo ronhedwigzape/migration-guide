@@ -5,49 +5,101 @@ description: Deploy the application locally for real events and handle backups.
 
 # Production Deployment (Local)
 
-Prepare your localhost environment for event use.
+This page walks you through building, configuring, and running your tabulation app on a production‑style XAMPP stack. **Note:** you’ll also need to deploy your WebSocket service separately—see the next section after this for the WebSocket Dashboard.
 
-## 1. Build Assets
+---
+
+## 1. Build Frontend Assets
+
+In your project root, run:
 
 ```bash
 npm run build
 ```
 
-## 2. Copy to XAMPP
+This compiles and minifies your frontend into `public`.
 
-1. Stop the dev server (`npm run dev`).
-2. Copy the project folder into `C:/xampp/htdocs/<competition-new-slug>`.
-3. Ensure `app/config/database.php` points to your `<competition-new-slug>` database.
+---
 
-## 3. Set Permissions
+## 2. Copy to XAMPP `htdocs`
 
-Ensure `/app/crud/uploads` is writable by Apache if photos will be uploaded.
+1. **Stop** any running development server (`Ctrl+C` in its terminal).
+2. Copy the **entire project folder** into `C:/xampp/htdocs/<competition-new-slug>`.
+3. In `app/config/database.php`, confirm you point to the **production‑local** database named exactly `<competition-new-slug>`.
+4. Ensure the folder permissions allow Apache to read and (for uploads) write to `app/crud/uploads`.
+
+---
 
 ## 4. Access the Application
 
-* **Public:**  `http://localhost/<competition-new-slug>/`
-* **Admin:**   `http://localhost/<competition-new-slug>/app` (change default password)
+* **Public URL:**
 
-## 5. Backups
+  ```
+  http://localhost/<competition-new-slug>/
+  ```
+* **Admin Dashboard:**
 
-::: details Backup Workflow
+  ```
+  http://localhost/<competition-new-slug>/app
+  ```
 
-* **During event:**
+  > 🔑 At this URL you can perform all CRUD operations—adding/editing criteria, teams/candidates, titles, eliminations, judge assignments, and more. Remember to change the default admin password immediately!
 
-  * Export DB via phpMyAdmin regularly.
-  * Backup `/app/crud/uploads`.
-* **After event:**
+---
 
-  * Export clean schema dump (omit `ratings`).
-  * Archive final results separately.
+## 5. Backup Strategy
+
+::: details During the Event
+
+* **Export Database** regularly from phpMyAdmin to capture live `ratings`.
+* **Backup Uploads**: copy `app/crud/uploads` (photos, files) to a separate folder.
 :::
 
-## 6. Network Access 
+::: details After the Event
 
-1. Find your machine’s LAN IP (e.g., `192.168.1.50`).
-2. Access via `http://192.168.1.50/<competition-new-slug>/`.
-3. Open HTTP port in your firewall if needed.
+1. **Clean Template Export**
 
-## 7. Cleanup
+  * In phpMyAdmin, select `<competition-new-slug>`.
+  * Use **Export → Custom** to exclude tables you don’t need (e.g. `ratings`).
+  * Download `<competition-new-slug>.sql` and commit it to your repo.
+2. **Archive Results**
 
-After the event, reset or re-import a fresh template for the next pageant and archive logs.
+  * Save a separate dump of the final `ratings` table if you need to preserve scores.
+:::
+
+---
+
+## 6. Network & LAN Access
+
+To allow multiple devices on your LAN to view the app:
+
+1. Find your PC’s LAN IP:
+
+  * Windows: `ipconfig` → look for “IPv4 Address”.
+2. In your firewall settings, ensure **port 80** (HTTP) is open.
+3. On another device, browse to:
+
+   ```
+   http://<LAN-IP>/<competition-new-slug>/
+   ```
+
+---
+
+## 7. Reminder: WebSocket Service
+
+Your real‑time dashboard requires the WebSocket server running separately.
+After completing this production deployment, navigate to **[WebSocket Dashboard](/websocket)** and follow those instructions to install and configure your WebSocket service (e.g., via NSSM on Windows).
+
+---
+
+## 8. Cleanup for Next Event
+
+When the pageant ends:
+
+1. **Reset or Re‑import** your `<competition-new-slug>` database from the clean template.
+2. **Archive** any generated logs or temporary files.
+3. Re‑seed initial data via the Admin UI or fresh SQL dump for the next competition.
+
+---
+
+With these steps, your app will run as a locally hosted “production” site, ready for judges, audience displays, and backups—and you’ll be primed to set up the WebSocket Dashboard next!

@@ -8,32 +8,40 @@ description: Fork, rebrand, import your DB, and insert initial data via the App 
 This guide walks you through forking or creating a new ACLC‑Iriga repository, importing your database, and seeding initial data via the UI.
 
 ::: tip
-I recommend using PHPStorm as your IDE for its powerful search and replace features.
+I recommend using **PHPStorm** for its powerful “Replace in Path” refactoring when you need to update slugs, titles, locations, or ports.
 :::
 
-## 0. Decide New Naming for the Competition
+## 0. Decide Your New Slug
 
-* **If the title contains “Miss”**:
-  `slug = 'miss' + condensed title` (lowercase, no spaces).
-  *Example:* “Miss Iriga” → `missiriga`.
+Determine the slug for your competition—this will name your GitHub repo, database, and URLs:
 
-* **Otherwise**:
-  `slug = uppercase initials + '-' + location` (no spaces).
-  *Example:* “Miss Gay San Roque” → `mgsr-sanroque`.
+- **If the title contains “Miss”**  
+  `slug = 'miss' + condensed title` (lowercase, no spaces)  
+  _Example:_ “Miss Iriga” → `missiriga`
 
-## 1. Fork the Base Repo
+- **Otherwise**  
+  `slug = uppercase initials + '-' + location` (no spaces)  
+  _Example:_ “Miss Gay San Roque” → `mgsr-sanroque`
 
-### Via GitHub Fork
+> Let’s call this `<competition-new-slug>` and your prior slug `<competition-old-slug>`.
 
-1. Click **Fork** on the canonical template (e.g., `missiriga`).  
-2. Choose the **aclc‑iriga** organization as the target.
-3. Rename the forked repo to `<competition-new-slug>`.
-4. Update the description to:
-   `Tabulation System for <Competition Title> (<Competition Location>)`.
-5. Uncheck the **Copy the master branch only** option.
-6. Click **Create fork**.
+---
 
-## 2. Clone Your New Repo
+## 1. Fork & Rename the Base Repo
+
+1. On GitHub, click **Fork** on the canonical template (e.g., `missiriga`).  
+2. Select the **aclc‑iriga** organization as the target.  
+3. Rename your fork to `<competition-new-slug>`.  
+4. Edit its description to:  
+```
+Tabulation System for <Competition Title> (<Competition Location>)
+```
+
+5. Uncheck “Copy the master branch only” if prompted, then **Create fork**.
+
+---
+
+## 2. Clone Locally
 
 ```bash
 cd C:/xampp/htdocs
@@ -41,89 +49,74 @@ git clone https://github.com/aclc‑iriga/<competition-new-slug>.git
 cd <competition-new-slug>
 ```
 
-::: tip
-Replace `<competition-new-slug>` with your desired slug (e.g., `mgsr-nabua`).
-:::
+---
 
-## 3. Refactoring & Port Update
+## 3. Refactor Identifiers & Bump Port
 
-Before you begin forking and importing:
+Use your IDE’s search‑and‑replace to update everywhere:
 
-1. **Refactor identifiers**
-   Open the project in **PHPStorm** (or your IDE of choice) and use its “Replace in Path” feature to update:
+* **`<competition-old-slug>`** → **`<competition-new-slug>`**
+* **Old competition title** → **New competition title**
+* **Old competition location** → **New competition location**
+* **Old port** (e.g. `5173`) → **New port** (e.g. `5174`)
 
-    * **`<competition-old-slug>`** → **`<competition-new-slug>`**
-    * **Old competition title** → **New competition title**
-    * **Old location** → **New location**
-    * **Old port** (e.g. `5173`) → **New port** (e.g. `5174`)
-
-2. **Update dev server port**
-   In your Vite config (e.g. `vite.config.js`), change:
+Then, in `vite.config.js` (or similar):
 
 ```js
 export default defineConfig({
-    // other configurations...
-    server: {
-        host: 'localhost',
-        port: 5174, // Change to your new port
-        strictPort: true
-    }
-    // other configurations...
+  // …other config…
+  server: {
+    host: 'localhost',
+    port: 5174,      // your new port
+    strictPort: true
+  }
 })
 ```
 
-## 4. Update Repository Metadata
+---
 
-1. **On GitHub**
+## 4. Create & Import Database
 
-    * Rename the repository to `<competition-new-slug>`.
-    * Update its description to:
-      `Tabulation System for <Competition Title> (<Competition Location>)`.
+### A. Create
 
-2. **Locally**
-   Search & replace across the codebase:
+In phpMyAdmin, create a database named exactly:
 
-    * **`<competition-old-slug>`** → **`<competition-new-slug>`**
-    * **Old competition title** → **New competition title**
-    * **Old competition location** → **New competition location**
+```
+<competition-new-slug>
+```
 
-## 5. Database Creation & Import
+### B. Import
 
-### Create Database
-
-In phpMyAdmin, create a database named exactly `<competition-new-slug>`.
-
-### Import Dump
-
-1. Go to the **Import** tab in phpMyAdmin.
-2. Select the `.sql` dump in your cloned repo.
+1. Open the **Import** tab in phpMyAdmin.
+2. Select the `.sql` dump shipped in your repo.
 3. Click **Go**.
 
 ::: warning
-All scoring data lives in the `ratings` table. This table is sensitive. Don't import when a dev server is running. 
+All scoring data lives in the `ratings` table—avoid importing while the app is running in development.
 :::
 
-## 6. Initial Data Insertion
+---
 
-```bash
-npm install
-npm run dev
-```
+## 5. Seed Initial Data
 
-* **Public URL:** `http://localhost:5174/<competition-new-slug>/`
-* **Admin URL:**  `http://localhost:5174/<competition-new-slug>/app`
+* **Admin:**  `http://localhost/<competition-new-slug>/app`
 
-Use the Admin Dashboard to add:
+Use the Admin Dashboard to populate:
 
 * Criteria
 * Titles
-* Teams (with photos for upload)
+* Participants/Teams (with photos)
 * Eliminations
 * Judge Assignments
 
-## 7. Export Final Database
+---
 
-1. In phpMyAdmin, select the `<competition-new-slug>` database.
-2. Click **Export**.
+## 6. Export Final Database
+
+1. In phpMyAdmin, select `<competition-new-slug>`.
+2. Click **Export** → **Custom**.
 3. Download the `.sql` file.
-4. Store it in your repo at the root level as `<competition-new-slug>.sql`.
+4. Add it to your repo root as:
+```
+<competition-new-slug>.sql
+```
