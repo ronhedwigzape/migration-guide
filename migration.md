@@ -23,7 +23,7 @@ git clone https://github.com/original/your-template.git
 cd your-template
 git remote remove origin
 git remote add origin https://github.com/aclc‑iriga/<your-new-slug>.git
-git push -u origin main
+git push -u origin master
 ```
 
 :::

@@ -39,6 +39,22 @@ footer: |
 
 ---
 
+Welcome to the ACLC-Iriga Tabulation documentation site. Use the navigation above or scroll down for quick links:
+
+::: details 🔗 Quick Links
+- 📁 [Project Structure](/index) – Overview of the documentation structure and files.
+- 🔄 [Migration Guide](/migration) – Forking/rebranding and initial database import & UI‑driven data insertion.
+- ⚙️ [Development Setup](/setup) – Installing dependencies, configuring, and running locally.
+- 🧪 [Backend Testing](/testing) – Setting up and running PHPUnit tests against a test database.
+- 🚀 [Production Deployment](/production) – Deploying for actual use on localhost and backup strategies.
+- 🌐 [WebSocket Dashboard](/websocket) – Integrating and accessing the real‑time Bullet‑Train dashboard.  
+:::
+
+
+---
+
+# ACLC-Iriga Tabulation Documentation 
+
 ## Prerequisites
 
 - **Node.js** (v18+ recommended; newer LTS such as v20 or v22 preferred)  
@@ -127,16 +143,16 @@ npm run deploy
     * In your Git client, undo the commit locally.
     * Delete `.vitepress/dist`.
 
----
+## Contributing
 
-Welcome to the ACLC-Iriga Tabulation documentation site. Use the navigation above or scroll down for quick links:
+We welcome improvements and corrections!  
+If you’d like to help make these docs better, please:
 
-::: details 🔗 Quick Links
+1. Fork this repo on GitHub:  
+   https://github.com/ronhedwigzape/migration-guide
+2. Create a branch with your changes.
+3. Submit a Pull Request against `master`.
 
-* [Migration Guide](/migration) – Forking/rebranding and initial database import & UI-driven data insertion.
-* [Development Setup](/setup) – Installing dependencies, configuring, and running locally.
-* [Backend Testing](/testing) – Setting up and running PHPUnit tests against a test database.
-* [Production Deployment](/production) – Deploying for actual use on localhost and backup strategies.
-* [WebSocket Dashboard](/websocket) – Integrating and accessing the real-time Bullet-Train dashboard.
-:::
+Thank you for your contributions! 🎉
+
 

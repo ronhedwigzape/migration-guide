@@ -2,8 +2,8 @@ import { defineConfig } from 'vitepress'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  title: "Unofficial General Migration Guide for Tabulation Softwares at ACLC-Iriga",
-  description: "Unified documentation for ACLC-Iriga tabulation systems",
+  title: "Repo Migration Guide",
+  description: "Unified documentation for ACLC-Iriga tabulation softwares",
   base: '/migration-guide/',
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
@@ -15,7 +15,8 @@ export default defineConfig({
       { text: 'Setup', link: '/setup' },
       { text: 'Testing', link: '/testing' },
       { text: 'Production', link: '/production' },
-      { text: 'WebSocket', link: '/websocket' }
+      { text: 'WebSocket', link: '/websocket' },
+      { text: 'Contributing', link: '/contributing' }
     ],
 
     // Sidebar configuration
